@@ -1,0 +1,32 @@
+---
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: param-ref-repro
+paths:
+  /without-ref:
+    get:
+      operationId: getFlagWithoutRef
+      parameters:
+        - name: flag
+          in: query
+          schema:
+            type: boolean
+      responses:
+        200:
+          description: Returns the flag
+  /with-ref:
+    get:
+      operationId: getFlagWithRef
+      parameters:
+        - name: flag
+          in: query
+          schema:
+            $ref: '#/components/schemas/SomeFlag'
+      responses:
+        200:
+          description: Returns the flag
+components:
+  schemas:
+    SomeFlag:
+      type: boolean
